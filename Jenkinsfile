@@ -4,21 +4,14 @@ pipeline {
         GO111MODULE = 'on'
     }
     stages {
-        stage('Build FE') {
+        stage('Build') {
             steps {
-                sh 'helm repo add podinfo http://mison201.github.io/podinfo/'
-                sh 'helm upgrade --install --wait frontend --namespace test --set replicaCount=2 --set backend=http://backend-podinfo:9898/echo podinfo/podinfo'
-
+                sh 'docker build Dockerfile'
             }
         }
-        stage('Test FE') {
+        stage('Test') {
             steps {
-                sh 'helm test frontend'
-            }
-        }
-        stage('Build BE') {
-             steps {
-                sh 'helm upgrade --install --wait backend --namespace test --set redis.enabled=true podinfo/podinfo'
+                echo 'Testing..'
             }
         }
         stage('Deploy') {
