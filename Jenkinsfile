@@ -1,10 +1,12 @@
 pipeline {
     agent any
-
+    environment {
+        GO111MODULE = 'on'
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'go build'
             }
         }
         stage('Test') {
