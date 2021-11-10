@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build FE') {
             steps {
-                sh 'helm repo add podinfo https://github.com/mison201/podinfo'
+                sh 'helm repo add podinfo http://mison201.github.io/podinfo/'
                 sh 'helm upgrade --install --wait frontend --namespace test --set replicaCount=2 --set backend=http://backend-podinfo:9898/echo podinfo/podinfo'
 
             }
